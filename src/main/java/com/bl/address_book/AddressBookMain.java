@@ -25,6 +25,10 @@ public class AddressBookMain
     public AddressBookMain(int srnum, String first_name, String last_name, String address, String state, int zip_code, long phone_number, String email_id) {
     }
 
+    public AddressBookMain() {
+
+    }
+
 
     public int getSrnum() {
         return Srnum;
