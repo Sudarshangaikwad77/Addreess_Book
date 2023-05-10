@@ -17,10 +17,21 @@ public class AddContact {
 
     public void addContact(AddressBookMain contact) {
         String firstName = contact.getFirstName();
-        ArrayList<AddressBookMain> contacts = addressBookMap.getOrDefault(firstName, new ArrayList<>());
-        contacts.add(contact);
-        addressBookMap.put(firstName, contacts);
-        System.out.println("Contact added successfully!");
+        String lastName = contact.getLastName();
+        String email = contact.getEmailId();
+        if (addressBookMap.containsKey(firstName)) {
+            ArrayList<AddressBookMain> contacts = addressBookMap.getOrDefault(firstName, new ArrayList<>());
+            for (AddressBookMain c : contacts) {
+                if (c.getFirstName().equals(firstName) && c.getLastName().equals(lastName) && c.getEmailId().equals(email)) {
+                    System.out.println("Contact is Already Exists!" + "\n" + "It's Not Add in Contacts!");
+                }
+            }
+        }else {
+            ArrayList<AddressBookMain >contacts; contacts = new ArrayList<>();
+            contacts.add(contact);
+            addressBookMap.put(firstName, contacts);
+            System.out.println("Contact Added Successfully");
+        }
     }
 
     public void displayContacts() {
@@ -34,7 +45,10 @@ public class AddContact {
     }
 
     public ArrayList<AddressBookMain> search(String firstName) {
-        return addressBookMap.get(firstName);
+        if (addressBookMap.containsKey(firstName)){
+            return addressBookMap.get(firstName);
+        }
+        return null;
     }
 
     public void deleteContact(String firstName) {
@@ -100,5 +114,6 @@ public class AddContact {
 
         sc.close();
     }
+
 
                     }
