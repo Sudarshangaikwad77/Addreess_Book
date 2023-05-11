@@ -1,63 +1,50 @@
-package com.bl.address_book;
-
+package refactor;
 import java.util.*;
-
-public class AddContact {
-
-    private Map<Object, ArrayList<AddressBookMain>> addressBookMap = new HashMap<>();
-
-    public List<ArrayList<AddressBookMain>> getFirst(String firstName) {
-        if (!addressBookMap.containsKey(firstName)) {
-            System.out.println("No contacts found for first name: " + firstName);
-            return Collections.emptyList();
-        }
-        return Collections.singletonList(addressBookMap.get(firstName));
-    }
-
-
-    public void addContact(AddressBookMain contact) {
+public class Contacts
+{
+    private Map<String,Address_Book_Main> addressBookMainMap = new HashMap<>();
+    public void addContact(Address_Book_Main contact) {
         String firstName = contact.getFirstName();
         String lastName = contact.getLastName();
         String email = contact.getEmailId();
-        if (addressBookMap.containsKey(firstName)) {
-            ArrayList<AddressBookMain> contacts = addressBookMap.getOrDefault(firstName, new ArrayList<>());
-            for (AddressBookMain c : contacts) {
-                if (c.getFirstName().equals(firstName) && c.getLastName().equals(lastName) && c.getEmailId().equals(email)) {
-                    System.out.println("Contact is Already Exists!" + "\n" + "It's Not Add in Contacts!");
+        ArrayList<Address_Book_Main> contacts = new ArrayList<>();
+
+        if (addressBookMainMap.containsKey(firstName))
+        {
+            System.out.println("Contact is Already Exists!" + "\n" + "It's Not Add in Contacts!");
                 }
-            }
-        }else {
-            ArrayList<AddressBookMain >contacts; contacts = new ArrayList<>();
-            contacts.add(contact);
-            addressBookMap.put(firstName, contacts);
+            else {
+                contacts.add(contact);
+            addressBookMainMap.put(firstName, contact);
             System.out.println("Contact Added Successfully");
         }
     }
 
     public void displayContacts() {
-        if (addressBookMap.isEmpty()) {
+        if (addressBookMainMap.isEmpty()) {
             System.out.println("No contacts found!");
         } else {
-            for (ArrayList<AddressBookMain> contact : addressBookMap.values()) {
+            for (Address_Book_Main contact : addressBookMainMap.values()) {
                 System.out.println(contact);
             }
         }
     }
 
-    public ArrayList<AddressBookMain> search(String firstName) {
-        if (addressBookMap.containsKey(firstName)){
-            return addressBookMap.get(firstName);
+    public Address_Book_Main search(String firstName) {
+        if (addressBookMainMap.containsKey(firstName)){
+            return addressBookMainMap.get(firstName);
         }
         return null;
     }
 
-    public void deleteContact(String firstName) {
-        addressBookMap.remove(firstName);
+    public void deleteContact(String firstName)
+    {
+        addressBookMainMap.remove(firstName);
         System.out.println("Contact deleted successfully!");
     }
 
     public static void main(String[] args) {
-        AddContact contacts = new AddContact();
+        Contacts contact = new Contacts();
         Scanner sc = new Scanner(System.in);
 
         int ch;
@@ -88,32 +75,30 @@ public class AddContact {
                 System.out.println("Enter E-mail: ");
                 String emailid = sc.next();
 
-                contacts.addContact(new AddressBookMain(firstName, lastName, address, city, state, zipcode, phonenum, emailid));
+                contact.addContact(new Address_Book_Main(firstName, lastName, address, city, state, zipcode, phonenum, emailid));
             } else if (ch == 2) {
-                contacts.displayContacts();
+                contact.displayContacts();
             } else if (ch == 3) {
                 System.out.println("Enter First Name: ");
                 String firstName = sc.next();
-                ArrayList<AddressBookMain> contact = contacts.search(firstName);
-                if (contact != null) {
-                    System.out.println(contact);
-                } else {
+                ArrayList<Address_Book_Main> contact2 = contact.search(firstName);
+                if (contact == null) {
                     System.out.println("Contact not found!");
+                } else {
+                    System.out.println(contact2);
                 }
             } else if (ch == 4) {
                 System.out.println("Enter First Name: ");
                 String firstName = sc.next();
-                ArrayList<AddressBookMain> contact = contacts.search(firstName);
-                if (contact != null) {
-                    contacts.deleteContact(firstName);
-                } else {
+                if (contact == null) {
                     System.out.println("Contact not found!");
+                } else {
+                    contact.deleteContact(firstName);
                 }
             }
         } while (ch != 0);
 
         sc.close();
     }
+}
 
-
-                    }

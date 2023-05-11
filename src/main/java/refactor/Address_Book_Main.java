@@ -1,10 +1,9 @@
-package com.bl.address_book;
+package refactor;
+
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-public class AddressBookMain
-{
+import java.util.function.IntFunction;
+
+public class Address_Book_Main extends ArrayList<Address_Book_Main> {
     private String firstName;
     private String lastName;
     private String address;
@@ -14,8 +13,7 @@ public class AddressBookMain
     private String emailId;
     private String City;
 
-    public AddressBookMain
-            (String firstName, String lastName, String address, String city, String state, int zipCode, long phoneNumber, String emailId) {
+    public Address_Book_Main(String firstName, String lastName, String address, String city, String state, int zipCode, long phoneNumber, String emailId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -93,7 +91,9 @@ public class AddressBookMain
                 "\nPhone Number: " + phoneNumber +
                 "\nEmail ID: " + emailId + "\n";
     }
-}
 
+
+
+}
 
 
