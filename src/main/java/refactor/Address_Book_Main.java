@@ -97,8 +97,8 @@ public class Address_Book_Main extends ArrayList<Address_Book_Main> {
                 "\nState: " + state +
                 "\nZip Code: " + zipCode +
                 "\nPhone Number: " + phoneNumber +
-                "\nEmail ID: " + emailId + "\n" +
-                "\ncity : "+city;
+                "\nEmail ID: " + emailId  +
+                "\ncity : "+city + "\n"+"**********************";
     }
 
 

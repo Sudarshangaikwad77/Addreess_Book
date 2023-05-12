@@ -1,20 +1,20 @@
 package refactor;
 import java.util.*;
-public class Contacts
-{
+public class Contacts {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Function function = new Function();
 
-
         int choice;
         do {
-            System.out.println("Enter your choice:");
             System.out.println("1. Add contact");
             System.out.println("2. Display contacts");
             System.out.println("3. Search by city");
             System.out.println("4. Deleting Contact");
+            System.out.println("5. Search by State");
+            System.out.println("0. Exit from AddressBook");
+            System.out.print("Enter your choice:");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -50,6 +50,11 @@ public class Contacts
                     System.out.println("Enter the First Name");
                     String remove = sc.next();
                     function.deleteContact(remove);
+                    break;
+                case 5:
+                    System.out.println("Enter State to Search");
+                    String searchState = sc.next();
+                    function.searchByState(searchState);
                 case 0:
                     System.out.println("Exiting program...");
                     break;
