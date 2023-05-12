@@ -11,14 +11,14 @@ public class Address_Book_Main extends ArrayList<Address_Book_Main> {
     private int zipCode;
     private long phoneNumber;
     private String emailId;
-    private String City;
+    private String city;
 
     public Address_Book_Main(String firstName, String lastName, String address, String city, String state, int zipCode, long phoneNumber, String emailId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.state = state;
-        this.City = city;
+        this.city = city;
         this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
         this.emailId = emailId;
@@ -31,6 +31,14 @@ public class Address_Book_Main extends ArrayList<Address_Book_Main> {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        city = city;
     }
 
     public String getLastName() {
@@ -89,7 +97,8 @@ public class Address_Book_Main extends ArrayList<Address_Book_Main> {
                 "\nState: " + state +
                 "\nZip Code: " + zipCode +
                 "\nPhone Number: " + phoneNumber +
-                "\nEmail ID: " + emailId + "\n";
+                "\nEmail ID: " + emailId + "\n" +
+                "\ncity : "+city;
     }
 
 

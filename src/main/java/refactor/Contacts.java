@@ -2,103 +2,61 @@ package refactor;
 import java.util.*;
 public class Contacts
 {
-    private Map<String,Address_Book_Main> addressBookMainMap = new HashMap<>();
-    public void addContact(Address_Book_Main contact) {
-        String firstName = contact.getFirstName();
-        String lastName = contact.getLastName();
-        String email = contact.getEmailId();
-        ArrayList<Address_Book_Main> contacts = new ArrayList<>();
-
-        if (addressBookMainMap.containsKey(firstName))
-        {
-            System.out.println("Contact is Already Exists!" + "\n" + "It's Not Add in Contacts!");
-                }
-            else {
-                contacts.add(contact);
-            addressBookMainMap.put(firstName, contact);
-            System.out.println("Contact Added Successfully");
-        }
-    }
-
-    public void displayContacts() {
-        if (addressBookMainMap.isEmpty()) {
-            System.out.println("No contacts found!");
-        } else {
-            for (Address_Book_Main contact : addressBookMainMap.values()) {
-                System.out.println(contact);
-            }
-        }
-    }
-
-    public Address_Book_Main search(String firstName) {
-        if (addressBookMainMap.containsKey(firstName)){
-            return addressBookMainMap.get(firstName);
-        }
-        return null;
-    }
-
-    public void deleteContact(String firstName)
-    {
-        addressBookMainMap.remove(firstName);
-        System.out.println("Contact deleted successfully!");
-    }
 
     public static void main(String[] args) {
-        Contacts contact = new Contacts();
         Scanner sc = new Scanner(System.in);
+        Function function = new Function();
 
-        int ch;
+
+        int choice;
         do {
-            System.out.println("Press 1 to add contact");
-            System.out.println("Press 2 to display contacts");
-            System.out.println("Press 3 to search for a contact");
-            System.out.println("Press 4 to delete a contact");
-            System.out.println("Press 0 to exit");
-            System.out.print("Enter your choice: ");
-            ch = sc.nextInt();
+            System.out.println("Enter your choice:");
+            System.out.println("1. Add contact");
+            System.out.println("2. Display contacts");
+            System.out.println("3. Search by city");
+            System.out.println("4. Deleting Contact");
+            choice = sc.nextInt();
 
-            if (ch == 1) {
-                System.out.println("Enter First Name: ");
-                String firstName = sc.next();
-                System.out.println("Enter Last Name: ");
-                String lastName = sc.next();
-                System.out.println("Enter Address: ");
-                String address = sc.next();
-                System.out.println("Enter State: ");
-                String state = sc.next();
-                System.out.println("Enter City: ");
-                String city = sc.next();
-                System.out.println("Enter Zip Code: ");
-                int zipcode = sc.nextInt();
-                System.out.println("Enter Phone Number: ");
-                long phonenum = sc.nextLong();
-                System.out.println("Enter E-mail: ");
-                String emailid = sc.next();
-
-                contact.addContact(new Address_Book_Main(firstName, lastName, address, city, state, zipcode, phonenum, emailid));
-            } else if (ch == 2) {
-                contact.displayContacts();
-            } else if (ch == 3) {
-                System.out.println("Enter First Name: ");
-                String firstName = sc.next();
-                ArrayList<Address_Book_Main> contact2 = contact.search(firstName);
-                if (contact == null) {
-                    System.out.println("Contact not found!");
-                } else {
-                    System.out.println(contact2);
-                }
-            } else if (ch == 4) {
-                System.out.println("Enter First Name: ");
-                String firstName = sc.next();
-                if (contact == null) {
-                    System.out.println("Contact not found!");
-                } else {
-                    contact.deleteContact(firstName);
-                }
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter first name:");
+                    String firstName = sc.next();
+                    System.out.println("Enter last name:");
+                    String lastName = sc.next();
+                    System.out.println("Enter address:");
+                    String address = sc.next();
+                    System.out.println("Enter city:");
+                    String city = sc.next();
+                    System.out.println("Enter state:");
+                    String state = sc.next();
+                    System.out.println("Enter zip code:");
+                    int zipCode = sc.nextInt();
+                    System.out.println("Enter phone number:");
+                    long phoneNumber = sc.nextLong();
+                    System.out.println("Enter email:");
+                    String email = sc.next();
+                    Address_Book_Main addressBook = new Address_Book_Main(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+                    function.addContact(addressBook);
+                    break;
+                case 2:
+                    function.displayContacts();
+                    break;
+                case 3:
+                    System.out.println("Enter city to search:");
+                    String searchCity = sc.next();
+                    function.searchByCity(searchCity);
+                    break;
+                case 4:
+                    System.out.println("Enter the First Name");
+                    String remove = sc.next();
+                    function.deleteContact(remove);
+                case 0:
+                    System.out.println("Exiting program...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-        } while (ch != 0);
-
+        } while (choice != 0);
         sc.close();
     }
 }
-
