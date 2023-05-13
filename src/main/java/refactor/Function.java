@@ -1,6 +1,7 @@
 package refactor;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Function {
     private final Map<String, List<Address_Book_Main>> addressbookmainmap = new HashMap<>();
@@ -27,7 +28,6 @@ public class Function {
             addressbookmainmap.put(state, stateContacts);
         }
     }
-
     public void displayContacts() {
         if (addressbookmainmap.isEmpty()) {
             System.out.println("No contacts found!");
@@ -86,6 +86,15 @@ public class Function {
         addressbookmainmap.remove(remove);
         System.out.println("Contact deleted successfully!");
     }
+    public void SortBook(){
+        List<String> contacts = addressbookmainmap.values().stream()
+                .flatMap(List::stream)
+                .sorted(Comparator.comparing(Address_Book_Main::getFirstName))
+                .map(Address_Book_Main::getFirstName)
+                .collect(Collectors.toList());
+        contacts.stream().forEach(System.out::println);
+    }
+
 }
 
 

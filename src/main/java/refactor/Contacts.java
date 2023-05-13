@@ -15,6 +15,7 @@ public class Contacts {
             System.out.println("5. Search by State");
             System.out.println("6. Total in city");
             System.out.println("7. Total in State");
+            System.out.println("8. Get Sorted List");
             System.out.println("0. Exit from AddressBook");
             System.out.print("Enter your choice:");
             choice = sc.nextInt();
@@ -63,6 +64,8 @@ public class Contacts {
                 case 7:
                     function.countState();
                     break;
+                case 8:
+                    function.SortBook();
                 case 0:
                     System.out.println("Exiting program...");
                     break;
