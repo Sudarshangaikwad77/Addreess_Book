@@ -13,6 +13,8 @@ public class Contacts {
             System.out.println("3. Search by city");
             System.out.println("4. Deleting Contact");
             System.out.println("5. Search by State");
+            System.out.println("6. Total in city");
+            System.out.println("7. Total in State");
             System.out.println("0. Exit from AddressBook");
             System.out.print("Enter your choice:");
             choice = sc.nextInt();
@@ -55,6 +57,12 @@ public class Contacts {
                     System.out.println("Enter State to Search");
                     String searchState = sc.next();
                     function.searchByState(searchState);
+                case 6:
+                    function.countCity();
+                    break;
+                case 7:
+                    function.countState();
+                    break;
                 case 0:
                     System.out.println("Exiting program...");
                     break;

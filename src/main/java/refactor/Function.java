@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Function {
     private final Map<String, List<Address_Book_Main>> addressbookmainmap = new HashMap<>();
-
+    Scanner sc = new Scanner(System.in);
 
     public void addContact(Address_Book_Main contact) {
         String city = contact.getCity();
@@ -61,6 +61,25 @@ public class Function {
                 System.out.println(contact);
             }
         }
+    }
+    public void countCity(){
+        System.out.println("Enter City Name:");
+        String city = sc.next();
+        long count = addressbookmainmap.values().stream()
+                .flatMap(List::stream)
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
+                .count();
+        System.out.println("Number of Contact In " + city + " = " + count);
+    }
+
+    public void countState(){
+        System.out.println("Enter the State Name:");
+        String state = sc.next();
+        long count = addressbookmainmap.values().stream().
+                flatMap(List::stream)
+                .filter(states -> states.getState().equalsIgnoreCase(state))
+                .count();
+        System.out.println("Number of Contact In " + state + " = " + count);
     }
     public void deleteContact(String remove)
     {
