@@ -14,11 +14,7 @@ public class Contacts {
             System.out.println("4. Deleting Contact");
             System.out.println("5. Search by State");
             System.out.println("6. Total in city");
-            System.out.println("7. Total in State");
-            System.out.println("8. Get Sorted List");
-            System.out.println("0. Exit from AddressBook");
-            System.out.print("Enter your choice:");
-            choice = sc.nextInt();
+            System.out.println("7. Total in State")
 
             switch (choice) {
                 case 1:
@@ -65,7 +61,9 @@ public class Contacts {
                     function.countState();
                     break;
                 case 8:
-                    function.SortBook();
+                    System.out.println("Enter field to sort by (City/State/Zip):");
+                    String field = sc.next();
+                    function.sortContacts(field);
                 case 0:
                     System.out.println("Exiting program...");
                     break;

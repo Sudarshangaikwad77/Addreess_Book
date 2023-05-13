@@ -86,15 +86,35 @@ public class Function {
         addressbookmainmap.remove(remove);
         System.out.println("Contact deleted successfully!");
     }
-    public void SortBook(){
-        List<String> contacts = addressbookmainmap.values().stream()
-                .flatMap(List::stream)
-                .sorted(Comparator.comparing(Address_Book_Main::getFirstName))
-                .map(Address_Book_Main::getFirstName)
-                .collect(Collectors.toList());
-        contacts.stream().forEach(System.out::println);
+    public void sortContacts(String field) {
+        Comparator<Address_Book_Main> comparator;
+        switch (field.trim().toLowerCase()) {
+            case "city":
+                comparator = Comparator.comparing(Address_Book_Main::getCity);
+                break;
+            case "state":
+                comparator = Comparator.comparing(Address_Book_Main::getState);
+                break;
+            case "zip":
+                comparator = Comparator.comparing(Address_Book_Main::getZipCode);
+                break;
+            default:
+                System.out.println("Invalid field!");
+                return;
+        }
+
+        List<Address_Book_Main> contacts = new ArrayList<>();
+        for (List<Address_Book_Main> cityContacts : addressbookmainmap.values()) {
+            contacts.addAll(cityContacts);
+        }
+        contacts.sort(comparator);
+
+        System.out.println("Sorted by " + field + ":");
+        contacts.forEach(System.out::println);
     }
 
-}
+
+    }
+
 
 
