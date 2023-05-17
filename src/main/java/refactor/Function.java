@@ -121,7 +121,7 @@ public class Function {
                 comparator = Comparator.comparing(Address_Book_Main::getState);
                 break;
             case "zip":
-                comparator = Comparator.comparing(Address_Book_Main::getZipCode);
+                comparator = Comparator.comparing(Address_Book_Main::getZipcode);
                 break;
             default:
                 System.out.println("Invalid field!");
@@ -139,7 +139,7 @@ public class Function {
     }
 
     public void writeContactToFile(Address_Book_Main contact) {
-        String fileName = "Address_Book.txt";
+        String fileName = "Address_BookCSV.txt";
         try {
             FileWriter fileWriter = new FileWriter(fileName, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -157,7 +157,7 @@ public class Function {
 
 
     public void readFromFile() {
-        String fileName = "Address_Book.txt";
+        String fileName = "Address_BookCSV.txt";
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
