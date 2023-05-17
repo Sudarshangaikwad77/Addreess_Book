@@ -1,11 +1,33 @@
 package refactor;
 
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Function {
     private final Map<String, List<Address_Book_Main>> addressbookmainmap = new HashMap<>();
     Scanner sc = new Scanner(System.in);
+
+
+    static Address_Book_Main getContactDetailsFromUser(Scanner scanner) {
+        System.out.println("Enter first name:");
+        String firstName = scanner.next();
+        System.out.println("Enter last name:");
+        String lastName = scanner.next();
+        System.out.println("Enter address:");
+        String address = scanner.next();
+        System.out.println("Enter city:");
+        String city = scanner.next();
+        System.out.println("Enter state:");
+        String state = scanner.next();
+        System.out.println("Enter zip code:");
+        int zipCode = scanner.nextInt();
+        System.out.println("Enter phone number:");
+        long phoneNumber = scanner.nextLong();
+        System.out.println("Enter email:");
+        String email = scanner.next();
+        return new Address_Book_Main(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+    }
 
     public void addContact(Address_Book_Main contact) {
         String city = contact.getCity();
@@ -27,6 +49,9 @@ public class Function {
             stateContacts.add(contact);
             addressbookmainmap.put(state, stateContacts);
         }
+
+        writeContactToFile(contact);
+
     }
     public void displayContacts() {
         if (addressbookmainmap.isEmpty()) {
@@ -113,8 +138,42 @@ public class Function {
         contacts.forEach(System.out::println);
     }
 
+    public void writeContactToFile(Address_Book_Main contact) {
+        String fileName = "Address_Book.txt";
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
+
+            bufferedWriter.write(contact.toString());
+            bufferedWriter.newLine();
+
+            bufferedWriter.close();
+            System.out.println("Contact added and written to the file successfully!");
+        } catch (IOException e) {
+            System.out.println("Error occurred while writing to the file: " + e.getMessage());
+        }
     }
+
+
+    public void readFromFile() {
+        String fileName = "Address_Book.txt";
+        try {
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred while reading the file: " + e.getMessage());
+        }
+    }
+
+}
 
 
 
